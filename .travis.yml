@@ -14,3 +14,8 @@ after_success:
   - docker build -t manojjonam/multi-ngnix ./ngnix
   - docker build -t manojjonam/multi-server ./server
   - docker build -t manojjonam/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push manojjonam/multi-client
+  - docker push manojjonam/multi-ngnix
+  - docker push manojjonam/multi-server
+  - docker push manojjonam/multi-worker
