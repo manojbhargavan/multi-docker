@@ -15,6 +15,7 @@ RUN npm run build
 
 # Base Container
 FROM nginx
+USER node
 EXPOSE 3000
-COPY --chown=node:node ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --chown=node:node ./ngnix/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /home/node/app/build /usr/share/nginx/html
