@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t manojjonam/react-app-tst -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run -e CI=true manojjonam/react-app-tst npm test
+
+after_success:
+  - docker build -t manojjonam/multi-client ./client
+  - docker build -t manojjonam/multi-ngnix ./ngnix
+  - docker build -t manojjonam/multi-server ./server
+  - docker build -t manojjonam/multi-worker ./worker
